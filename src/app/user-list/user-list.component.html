@@ -1,0 +1,52 @@
+<br>
+<div class="container">
+
+  <input class="form-control mr-sm-2" type="search" placeholder="Search" (keyup)="search($event)">
+<br>
+
+
+  <input type="text" placeholder="name" [(ngModel)]="newName" >
+  <input type="text" placeholder="age" [(ngModel)]="newAge">
+  <input type="text" placeholder="address" [(ngModel)]="newAddress">
+  <input type="text" placeholder="email" [(ngModel)]="newEmail">
+  <button type="button" (click)="addUser()">Add User</button>
+  <hr>
+
+  <input type="text" placeholder="id" [(ngModel)]="updateId" >
+  <input type="text" placeholder="name" [(ngModel)]="updateName" >
+  <input type="text" placeholder="age" [(ngModel)]="updateAge">
+  <input type="text" placeholder="address" [(ngModel)]="updateAddress">
+  <input type="text" placeholder="email" [(ngModel)]="updateEmail">
+  <button type="button" (click)="updateUser()">Update User</button>
+
+
+
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Age</th>
+    <th scope="col">Address</th>
+    <th [hidden]="hidden" scope="col">Email</th>
+    <th scope="col" colspan="2">Action</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of userFilter; let i = index ">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{user.name}}</td>
+    <td>{{user.age}}</td>
+    <td>{{user.address}}</td>
+    <td [hidden]="hidden">{{user.email}}</td>
+    <td><button class="btn btn-success" (click)="editUser(user.id)">Edit</button></td>
+    <td><button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button></td>
+
+  </tr>
+
+  </tbody>
+</table>
+
+  <button type="button" class="btn btn-success" (click)="changeHidden()">Show/Hide</button>
+</div>
