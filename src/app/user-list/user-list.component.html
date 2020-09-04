@@ -1,7 +1,8 @@
 <br>
 <div class="container">
 
-  <input class="form-control mr-sm-2" type="search" placeholder="Search" (keyup)="search($event)">
+  <app-input-search (keyword)="search($event)"></app-input-search>
+  <app-message [message]="message"></app-message>
 <br>
 
 
@@ -21,6 +22,8 @@
 
 
 
+
+
 <table class="table">
   <thead class="thead-dark">
   <tr>
@@ -34,7 +37,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let user of userFilter; let i = index ">
+  <tr *ngFor="let user of userFilter | paginate: { itemsPerPage: 1, currentPage: p }; let i = index ">
     <th scope="row">{{i + 1}}</th>
     <td>{{user.name}}</td>
     <td>{{user.age}}</td>
@@ -47,6 +50,7 @@
 
   </tbody>
 </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
   <button type="button" class="btn btn-success" (click)="changeHidden()">Show/Hide</button>
 </div>

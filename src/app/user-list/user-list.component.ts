@@ -7,6 +7,8 @@ import {IUser} from '../iuser';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  message: string;
+  p: number = 1;
 
   newName: string;
   newAge: number;
@@ -70,9 +72,9 @@ export class UserListComponent implements OnInit {
   }
 
   search(event) {
-    let keyword = event.target.value.toLowerCase();
-    console.log(keyword);
-    this.userFilter = (keyword) ? this.filterUser(keyword) : this.users;
+
+    console.log(event);
+    this.userFilter = (event) ? this.filterUser(event) : this.users;
   }
 
   filterUser(keyword) {
@@ -82,8 +84,13 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(id) {
-    let index = this.userFilter.findIndex(userFilter => userFilter.id === id);
-    this.userFilter.splice(index, 1);
+    if(confirm('Are you sure'))
+    {
+      let index = this.userFilter.findIndex(userFilter => userFilter.id === id);
+      this.userFilter.splice(index, 1);
+      this.message ='Xoa thanh cong!!';
+    }
+
   }
 
   addUser() {
